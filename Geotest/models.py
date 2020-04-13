@@ -1,9 +1,9 @@
 from django.db import models
 
-class Ort(models.Model):
-    ortname = models.CharField(max_length=255)
-    ortidx = models.CharField(max_length=255)
+class Location(models.Model):
+    locationname = models.CharField(max_length=255)
+    locationidx = models.CharField(max_length=255)
     htmlbody = models.TextField()
 
     def __str__(self):
-        return '{} / {}'.format(self.ortname, self.ortidx)
+        return '{} / {}'.format(self.locationname, self.locationidx)

@@ -20,7 +20,10 @@ from Geotest import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
-    path('<int:ort_id>/', views.display_ort),
-    path('entername/', views.entername),
-    path('<str:entered_url>/', views.not_valid),
+    path('location/<int:location_id>/', views.display_location),
+
+    #---the not valid URL's:
+    path('location/<str:entered_url>/', views.not_valid),
+    path('<int:entered_url>', views.not_valid),
+    path('<str:entered_url>', views.not_valid),
 ]
