@@ -5,6 +5,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 import django
 
+from businesslogic import get_session
+
 from Geotest.models import Location
 
 def index(request):
@@ -22,4 +24,6 @@ def display_location(request, location_id):
 
 
 def not_valid(request, entered_url):
-    return HttpResponse('hier ist nichts.')
+    session = get_session(request)
+    session['wrongurls'] += 1
+    return HttpResponse('hier ist nichts. Anzahl Fehlversuche: %s' %str(session['wrongurls']))
