@@ -24,7 +24,7 @@ def display_location(request, location_id):
 
 def not_valid(request, entered_url):
     session = get_session(request)
-    return HttpResponse('hier ist nichts. Session=%s' %str(session))
+    return HttpResponse('hier ist nichts. get_session wurde durchlaufen')
     
     #session['wrongurls'] += 1
     #return HttpResponse('hier ist nichts. Anzahl Fehlversuche: %s. Session=%s' %(str(session['wrongurls']), str(session)))
