@@ -19,7 +19,7 @@ def display_location(request, location_id):
         location = locations[0]
         return render(request, 'index.html', {'title': location.locationname, 'body': location.htmlbody})
     else:
-        not_valid(request, location_id)
+        return not_valid(request, location_id)
 
 
 def not_valid(request, entered_url):
