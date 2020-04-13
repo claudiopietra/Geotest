@@ -2,9 +2,10 @@
     textadventure project. """
     
 def get_session(request):
-    if "initialized" not in request.session:
-        request.session['initialized'] = True
-        request.session['inventory'] = []
-        request.session['wrongpages'] = 0
+    session = request.session
+    if not session.get('initialized', False):
+        session['initialized'] = True
+        session['inventory'] = []
+        session['wrongurls'] = 0
         
-    return request.session
+    return session
