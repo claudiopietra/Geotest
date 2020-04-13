@@ -7,6 +7,7 @@ import django
 
 from .businesslogic import get_session
 from .businesslogic import add_item_to_inventory
+from .businesslogic import get_inventory_name_list
 from .models import Location, Item
 
 def index(request):
@@ -18,7 +19,7 @@ def display_location(request, location_id):
     locations = Location.objects.filter(locationidx=location_id)
     if len(locations):
         location = locations[0]
-        inventory_list = get_session(request)["inventory"]
+        inventory_list = get_inventory_name_list(request)
         return HttpResponse("Inventorylist: %s" %str(inventory_list))
         return render(request, 'location.html', {'ort': location.locationname, 'body': location.htmlbody, 'inventory_list': inventory_list})
     else:

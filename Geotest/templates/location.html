@@ -12,7 +12,7 @@
         <img src="{% static "/1.jpg" %}">
         <h1>{{ ort }}</h1>
         {{ body|safe }}
-        <br>Inventar:<br>
+        <p>Inventar:
         {% if inventory_list %}
         <ul>
         {% for item in inventory_list %}
@@ -22,5 +22,6 @@
         {% else %}
         <p>Ausser Deinen Kleidern keine Gegenstände</p>
         {% endif %}
+        </p>
     </body>
 </html>
