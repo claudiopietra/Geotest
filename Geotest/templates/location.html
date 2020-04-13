@@ -12,7 +12,7 @@
         <img src="{% static "/1.jpg" %}">
         <h1>{{ ort }}</h1>
         {{ body|safe }}
-        <p>Inventar:
+        <p>Dein Inventar:
         {% if inventory_list %}
         <ul>
         {% for item in inventory_list %}
