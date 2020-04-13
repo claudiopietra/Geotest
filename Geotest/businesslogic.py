@@ -21,6 +21,7 @@ def add_item_to_inventory(request, item_id):
     itemname = ""
     items = Item.objects.filter(itemidx=item_id)
     if len(items):
+        session = get_session(request)
         #---Item found, check if already in inventory
         if item_id not in session['inventory']:
             session['inventory'].append(item_id)
