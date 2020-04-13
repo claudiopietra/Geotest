@@ -3,7 +3,8 @@ from .models import Location
 from .models import Item
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display('itemidx', 'itemname')
+    #list_display('itemidx', 'itemname')
+    pass
 
 admin.site.register(Location)
 admin.site.register(Item, ItemAdmin)
