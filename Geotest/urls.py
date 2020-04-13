@@ -21,6 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('location/<int:location_id>/', views.display_location),
+    path('item/<int:item_id>/add', views.add_item)
+    path('item/<int:item_id>/remove', views.remove_item)
 
     #---the not valid URL's:
     path('location/<str:entered_url>/', views.not_valid),

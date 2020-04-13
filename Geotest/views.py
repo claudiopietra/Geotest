@@ -20,6 +20,15 @@ def display_location(request, location_id):
         return render(request, 'index.html', {'title': location.locationname, 'body': location.htmlbody})
     else:
         return not_valid(request, location_id)
+        
+        
+def add_item(request, item_id):
+    items = Items.objects.filter(itemidx=item_id)
+    if len(items):
+        session["inventory"].append(item_id)
+        return HttpResponse("Du hast ein %s erhalten" %item.itemname)
+    else:
+        return HttpResponse("Gegensatz nicht gefunden.")
 
 
 def not_valid(request, entered_url):
@@ -27,7 +36,9 @@ def not_valid(request, entered_url):
     session['wrongurls'] += 1
     if session['wrongurls'] >= 15:
         session.flush()
+        #---TODO: mit einem Template zurueckgeben
         return HttpResponse('Du hast Dich offensichtlich (virtuell) verlaufen, wir schlagen vor, dass Du nochmals von vorne anfaengst')
     else:
+        #---TODO: mit einem Template zurueckgeben
         return HttpResponse('hier ist nichts. kommt von not_valid. get_session lief. Anzahl fehlerhaften Aufrufe: %s' %str(session['wrongurls']))
     
