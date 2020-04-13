@@ -6,6 +6,7 @@ from django.shortcuts import render
 import django
 
 from .businesslogic import get_session
+from .businesslogic import reset_session
 from .models import Location
 
 def index(request):
@@ -25,7 +26,9 @@ def display_location(request, location_id):
 def not_valid(request, entered_url):
     session = get_session(request)
     session['wrongurls'] += 1
-    return HttpResponse('hier ist nichts. kommt von not_valid. get_session lief. Anzahl fehlerhaften Aufrufe: %s' %str(session['wrongurls']))
+    if session['wrongurls'] >= 15:
+        session.flush()
+        return HttpResponse('Du hast Dich offensichtlich (virtuell) verlaufen, wir schlagen vor, dass Du nochmals von vorne anfängst')
+    else:
+        return HttpResponse('hier ist nichts. kommt von not_valid. get_session lief. Anzahl fehlerhaften Aufrufe: %s' %str(session['wrongurls']))
     
-    #session['wrongurls'] += 1
-    #return HttpResponse('hier ist nichts. Anzahl Fehlversuche: %s. Session=%s' %(str(session['wrongurls']), str(session)))
