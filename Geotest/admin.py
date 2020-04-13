@@ -1,4 +1,5 @@
 from django.contrib import admin
-from .models import Location
+import Geotest.models
 
-admin.site.register(Location)
+admin.site.register(models.Location)
+admin.site.register(model.sItem)

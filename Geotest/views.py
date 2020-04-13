@@ -7,10 +7,8 @@ import django
 
 from Geotest.models import Location
 
-
 def index(request):
     """ Redirect to the first location. """
-
     return HttpResponseRedirect('/location/12345')
 
 
@@ -20,7 +18,7 @@ def display_location(request, location_id):
         location = locations[0]
         return render(request, 'index.html', {'title': location.locationname, 'body': location.htmlbody})
     else:
-        return HttpResponse('nicht gefunden, Nummer ist %i' %location_id)
+        not_valid(request, location_id)
 
 
 def not_valid(request, entered_url):
