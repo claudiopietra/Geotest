@@ -27,6 +27,7 @@ def add_item(request, item_id):
     items = Item.objects.filter(itemidx=item_id)
     if len(items):
         session["inventory"].append(item_id)
+        item = items[0]
         return HttpResponse("Du hast ein %s erhalten" %item.itemname)
     else:
         return HttpResponse("Gegensatz nicht gefunden.")
