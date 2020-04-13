@@ -16,6 +16,3 @@ class Item(models.Model):
     
     def __str__(self):
         return '{}'.format(self.itemname)
-        
-class ItemAdmin(admin.ModelAdmin):
-    list_display('itemidx', 'itemname')
