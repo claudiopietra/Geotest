@@ -5,9 +5,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 import django
 
-from businesslogic import get_session
-
-from Geotest.models import Location
+from .businesslogic import get_session
+from .models import Location
 
 def index(request):
     """ Redirect to the first location. """
