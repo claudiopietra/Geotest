@@ -18,6 +18,7 @@ def display_location(request, location_id):
     if len(locations):
         location = locations[0]
         inventory_list = get_session(request)["inventory"]
+        return HttpResponse("Inventorylist: %s" %str(inventory_list))
         return render(request, 'location.html', {'ort': location.locationname, 'body': location.htmlbody, 'inventory_list': inventory_list})
     else:
         return not_valid(request, location_id)
