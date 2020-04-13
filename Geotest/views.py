@@ -19,13 +19,12 @@ def display_location(request, location_id):
         location = locations[0]
         return render(request, 'index.html', {'title': location.locationname, 'body': location.htmlbody})
     else:
-        return HttpResponse('hier ist nichts.')
-        #return not_valid(request, location_id)
+        return not_valid(request, location_id)
 
 
 def not_valid(request, entered_url):
     #session = get_session(request)
-    return HttpResponse('hier ist nichts. get_session wurde durchlaufen')
+    return HttpResponse('hier ist nichts. kommt von not_valid.')
     
     #session['wrongurls'] += 1
     #return HttpResponse('hier ist nichts. Anzahl Fehlversuche: %s. Session=%s' %(str(session['wrongurls']), str(session)))
