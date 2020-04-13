@@ -17,7 +17,8 @@ def display_location(request, location_id):
     locations = Location.objects.filter(locationidx=location_id)
     if len(locations):
         location = locations[0]
-        return render(request, 'index.html', {'title': location.locationname, 'body': location.htmlbody})
+        inventory_list = get_session(request)["inventory"]
+        return render(request, 'location.html', {'ort': location.locationname, 'body': location.htmlbody, 'inventory_list': inventory_list})
     else:
         return not_valid(request, location_id)
         
@@ -30,7 +31,7 @@ def add_item(request, item_id):
         item = items[0]
         return HttpResponse("Du hast ein %s erhalten" %item.itemname)
     else:
-        return HttpResponse("Gegensatz nicht gefunden.")
+        return HttpResponse("Gegenstand nicht gefunden.")
 
 
 def remove_item(request, item_id):

@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{{ ort }}</title>
+        <link rel="stylesheet" href="{% static "/Geotest.css" %}" />
+    </head>
+
+    <body>
+        <img src="{% static "/1.jpg" %}">
+        <h1>{{ ort }}</h1>
+        {{ body|safe }}
+        <br>Inventar:<br>
+        {% if inventory_list %}
+        <ul>
+        {% for item in inventory_list %}
+            <li>{{ item.itemname }}</li>
+        {% else %}
+        <p>Ausser Deinen Kleidern keine Gegenstände</p>
+        {% endif %}
+    </body>
+</html>
