@@ -4,9 +4,9 @@ from django.db import models
 class Location(models.Model):
     locationname = models.CharField(max_length=255)
     locationidx = models.CharField(max_length=255)
-    comment = models.CharField(max_length=255, default="")
-    in_inventory = models.CharField(max_length=255, default="")
-    not_in_inventory = models.CharField(max_length=255, default="")
+    comment = models.CharField(max_length=255, default="", blank=True)
+    in_inventory = models.CharField(max_length=255, default="", blank=True)
+    not_in_inventory = models.CharField(max_length=255, default="", blank=True)
     htmlbody = models.TextField()
 
     def __str__(self):

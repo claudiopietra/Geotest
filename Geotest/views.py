@@ -12,7 +12,7 @@ from .models import Location, Item
 
 def index(request):
     """ Redirect to the first location. """
-    return HttpResponseRedirect('/location/12345')
+    return HttpResponseRedirect('/location/872308')
 
 
 def display_location(request, location_id):
