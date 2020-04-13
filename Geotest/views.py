@@ -23,6 +23,7 @@ def display_location(request, location_id):
         
         
 def add_item(request, item_id):
+    session = get_session(request)
     items = Item.objects.filter(itemidx=item_id)
     if len(items):
         session["inventory"].append(item_id)
