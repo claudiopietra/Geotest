@@ -31,6 +31,10 @@ def add_item(request, item_id):
         return HttpResponse("Gegensatz nicht gefunden.")
 
 
+def remove_item(request, item_id):
+    pass
+
+
 def not_valid(request, entered_url):
     session = get_session(request)
     session['wrongurls'] += 1
