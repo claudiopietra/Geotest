@@ -23,11 +23,11 @@ def find_location(request, location_id):
     inventory = get_session(request)['inventory']
     locations = Location.objects.filter(locationidx=location_id)
     for location in locations:
-        if int(location.in_inventory) in inventory:
+        if location.in_inventory in inventory:
             return_location = location
             break
             
-        if int(location.not_in_inventory) not in inventory:
+        if location.not_in_inventory not in inventory:
             return_location = location
             break
 
