@@ -16,7 +16,7 @@ def get_session(request):
     return session
 
 
-def add_item_to_inventory(request, item_id)
+def add_item_to_inventory(request, item_id):
     """ Adds an item to the inventory. """
     itemname = ""
     items = Item.objects.filter(itemidx=item_id)
