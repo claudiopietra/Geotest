@@ -29,7 +29,7 @@ def get_item_name(item_id):
 
 def add_item_to_inventory(request, item_id):
     """ Adds an item to the inventory. """
-    itemname = get_item_name(item_idx)
+    itemname = get_item_name(item_id)
     if itemname:
         session = get_session(request)
         #---Item found, check if already in inventory
