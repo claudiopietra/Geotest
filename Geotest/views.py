@@ -28,7 +28,7 @@ def not_valid(request, entered_url):
     session['wrongurls'] += 1
     if session['wrongurls'] >= 15:
         session.flush()
-        return HttpResponse('Du hast Dich offensichtlich (virtuell) verlaufen, wir schlagen vor, dass Du nochmals von vorne anfängst')
+        return HttpResponse('Du hast Dich offensichtlich (virtuell) verlaufen, wir schlagen vor, dass Du nochmals von vorne anfaengst')
     else:
         return HttpResponse('hier ist nichts. kommt von not_valid. get_session lief. Anzahl fehlerhaften Aufrufe: %s' %str(session['wrongurls']))
     
