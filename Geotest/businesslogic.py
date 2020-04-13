@@ -24,7 +24,7 @@ def add_item_to_inventory(request, item_id):
         #---Item found, check if already in inventory
         if item_id not in session['inventory']:
             session['inventory'].append(item_id)
-                itemname = items[0].itemname
+            itemname = items[0].itemname
                 
     return itemname
 
