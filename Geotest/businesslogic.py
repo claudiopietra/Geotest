@@ -15,6 +15,24 @@ def get_session(request):
 
     return session
     
+    
+def find_location(request, location_id):
+    """ Finds the location with location_id, which matches
+        the items in the inventory. """
+    return_location = None
+    inventory = get_session(request)['inventory']
+    locations = Location.objects.filter(locationidx=location_id)
+    for location in locations:
+        if int(location.in_inventory) in inventory:
+            return_location = location
+            break
+            
+        if int(location.not_in_inventory) not in inventory:
+            return_location = location
+            break
+
+    return return_location
+
 
 def get_item_name(item_id):    
     """ Gets a name for an item-index. Returns '' if the 

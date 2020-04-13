@@ -8,6 +8,7 @@ import django
 from .businesslogic import get_session
 from .businesslogic import add_item_to_inventory
 from .businesslogic import get_inventory_name_list
+from .businesslogic import find_location
 from .models import Location, Item
 
 def index(request):
@@ -16,6 +17,7 @@ def index(request):
 
 
 def display_location(request, location_id):
+    find_location(request, location_id)
     locations = Location.objects.filter(locationidx=location_id)
     if len(locations):
         location = locations[0]
