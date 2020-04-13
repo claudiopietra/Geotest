@@ -81,6 +81,9 @@ DATABASES = {
         'USER': 'claudiopietra',
         'PASSWORD': '882laf_kKlakfqcv',
         'HOST': 'claudiopietra.mysql.pythonanywhere-services.com',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },        
     }
 }
 
