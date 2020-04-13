@@ -6,7 +6,6 @@ from django.shortcuts import render
 import django
 
 from .businesslogic import get_session
-from .businesslogic import reset_session
 from .models import Location
 
 def index(request):
