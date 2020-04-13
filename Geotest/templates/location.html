@@ -17,6 +17,8 @@
         <ul>
         {% for item in inventory_list %}
             <li>{{ item.itemname }}</li>
+        {% endfor %}
+        </ul>
         {% else %}
         <p>Ausser Deinen Kleidern keine Gegenstände</p>
         {% endif %}
