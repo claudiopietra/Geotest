@@ -7,7 +7,7 @@ class Location(models.Model):
     htmlbody = models.TextField()
 
     def __str__(self):
-        return '{} / {}'.format(self.locationname, self.locationidx)
+        return self.locationname
         
         
 class Item(models.Model):
@@ -15,4 +15,4 @@ class Item(models.Model):
     itemidx = models.CharField(max_length=255)
     
     def __str__(self):
-        return '{}'.format(self.itemname)
+        return self.itemname
