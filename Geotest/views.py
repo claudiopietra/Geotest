@@ -23,7 +23,7 @@ def display_location(request, location_id):
 
 
 def not_valid(request, entered_url):
-    session = get_session(request)
+    #session = get_session(request)
     return HttpResponse('hier ist nichts. get_session wurde durchlaufen')
     
     #session['wrongurls'] += 1
