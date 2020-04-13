@@ -6,6 +6,7 @@ from django.shortcuts import render
 import django
 
 from .businesslogic import get_session
+from .businesslogic import add_item_to_inventory
 from .models import Location, Item
 
 def index(request):
