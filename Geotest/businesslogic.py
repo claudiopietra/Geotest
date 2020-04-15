@@ -6,7 +6,7 @@ from .models import Location, Item
 def get_session(request):
     """ Initialize the session, if not already done. """
     session = request.session
-    if session.get('initialized', False):
+    if not 'initialized' in session:
         #---Session should expire in 24h = 86400s
         session.set_expiry(86400)
         session['initialized'] = True
