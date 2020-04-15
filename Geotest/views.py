@@ -44,9 +44,9 @@ def remove_item(request, item_id):
     if itemname:
         if is_item_in_inventory(request, item_id):
             remove_item_from_inventory(request, item_id)
-            HttpResponse("Du hast ein %s gegeben" %itemname)
+            return HttpResponse("Du hast ein %s gegeben" %itemname)
         else:
-            HttpResponse("Du hast den Gegenstand gar nicht. ")
+            return HttpResponse("Du hast den Gegenstand gar nicht. ")
     else:
         return HttpResponse("Gegenstand nicht gefunden.")
 
