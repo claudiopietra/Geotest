@@ -20,7 +20,7 @@ def find_location(request, location_id):
     """ Finds the location with location_id, which matches
         the items in the inventory. """
     return_location = None
-    inventory = get_session(request)['inventory']
+    inventory = get_inventory_list(request)
     locations = Location.objects.filter(locationidx=location_id)
     for location in locations:
         if location.in_inventory in inventory:
@@ -34,6 +34,10 @@ def find_location(request, location_id):
             break
 
     return return_location
+
+
+def get_inventory_list(request):
+    return get_session(request)['inventory']
 
 
 def get_item_name(item_id):    
@@ -51,19 +55,34 @@ def add_item_to_inventory(request, item_id):
     """ Adds an item to the inventory. """
     itemname = get_item_name(item_id)
     if itemname:
-        session = get_session(request)
         #---Item found, check if already in inventory
-        if item_id not in session['inventory']:
+        inventory = get_inventory_list(request)
+        if item_id not in inventory:
             #---somehow a direct append on the list stored in the session
             #   doesn't word - don't know why, but copying out and in again
-            #   solves the problem. 
-            item_list = session['inventory']
+            #   solves the problem.
             #---we store the string of the item_id, makes it easier to handle
             #   within lists and to compare it to textfields in the Location object.
-            item_list.append(str(item_id))
-            session['inventory'] = item_list
+            inventory.append(str(item_id))
+            get_session['inventory'] = inventory
                 
     return itemname
+
+
+def remove_item_from_inventory(request, item_id):
+    """ Removes an item from the inventory. """
+    itemname = get_item_name(item_id)
+    if itemname:
+        inventory = get_inventory_list(request)
+        if item_id not in inventory:
+            inventory.remove(str(item_id))
+            get_session['inventory'] = inventory
+
+        
+def is_item_in_inventory(request, item_id):
+    """ Returns if an item_id is in the inventory. We store
+        the id's as strings in the list. """
+    return str(item_id) in get_inventory_list(request)
 
 
 def get_inventory_name_list(request):

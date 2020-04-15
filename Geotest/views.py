@@ -8,6 +8,8 @@ import django
 from .businesslogic import get_session
 from .businesslogic import add_item_to_inventory
 from .businesslogic import get_inventory_name_list
+from .businesslogic import get_inventory_list
+from .businesslogic import is_item_in_inventory
 from .businesslogic import find_location
 from .models import Location, Item
 
@@ -30,13 +32,21 @@ def display_location(request, location_id):
 def add_item(request, item_id):
     itemname = add_item_to_inventory(request, item_id)
     if itemname:     
-        return HttpResponse("Du hast ein %s erhalten, inventory=%s" %(itemname, str(request.session['inventory'])))
+        return HttpResponse("Du hast ein %s erhalten" %itemname)
     else:
         return HttpResponse("Gegenstand nicht gefunden.")
 
 
 def remove_item(request, item_id):
-    return HttpResponseRedirect('Here I am')
+    itemname = get_item_name(request, item_id)
+    if itemname:
+        if is_item_in_inventory(request, item_id):
+            remove_item_from_inventory(request, item_id)
+            HttpResponse("Du hast ein %s gegeben" %itemname)
+        else:
+            HttpResponse("Du hast den Gegenstand gar nicht. ")
+    else:
+        return HttpResponse("Gegenstand nicht gefunden.")
 
 
 def not_valid(request, entered_url):
