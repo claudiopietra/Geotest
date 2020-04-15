@@ -36,7 +36,7 @@ def add_item(request, item_id):
 
 
 def remove_item(request, item_id):
-    pass
+    HttpResponseRedirect('Here I am')
 
 
 def not_valid(request, entered_url):
