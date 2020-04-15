@@ -10,6 +10,7 @@ from .businesslogic import add_item_to_inventory
 from .businesslogic import get_inventory_name_list
 from .businesslogic import get_inventory_list
 from .businesslogic import is_item_in_inventory
+from .businesslogic import get_item_name
 from .businesslogic import find_location
 from .models import Location, Item
 
