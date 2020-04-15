@@ -22,6 +22,7 @@ def find_location(request, location_id):
     return_location = None
     inventory = get_session(request)['inventory']
     locations = Location.objects.filter(locationidx=location_id)
+    return str(len(locations))
     for location in locations:
         if location.in_inventory in inventory:
             return_location = location

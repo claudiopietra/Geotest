@@ -17,7 +17,9 @@ def index(request):
 
 
 def display_location(request, location_id):
+    return HttpResponse(find_location(request, location_id))
     location = find_location(request, location_id)
+    
     if location:
         inventory_list = get_inventory_name_list(request)
         return render(request, 'location.html', {'ort': location.locationname, 'body': location.htmlbody, 'inventory_list': inventory_list})
