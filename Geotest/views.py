@@ -17,7 +17,7 @@ def index(request):
 
 
 def display_location(request, location_id):
-    return HttpResponse(find_location(request, location_id))
+    #return HttpResponse(find_location(request, location_id))
     location = find_location(request, location_id)
     
     if location:
