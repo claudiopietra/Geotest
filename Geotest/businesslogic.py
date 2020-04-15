@@ -64,7 +64,8 @@ def add_item_to_inventory(request, item_id):
             #---we store the string of the item_id, makes it easier to handle
             #   within lists and to compare it to textfields in the Location object.
             inventory.append(str(item_id))
-            get_inventory_list(request) = inventory
+            session = get_session(request)
+            session['inventory'] = inventory
                 
     return itemname
 
@@ -76,7 +77,8 @@ def remove_item_from_inventory(request, item_id):
         inventory = get_inventory_list(request)
         if item_id not in inventory:
             inventory.remove(str(item_id))
-            get_inventory_list(request) = inventory
+            session = get_session(request)
+            session['inventory'] = inventory
 
         
 def is_item_in_inventory(request, item_id):
