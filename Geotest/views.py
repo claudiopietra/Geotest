@@ -39,7 +39,7 @@ def add_item(request, item_id):
 
 
 def remove_item(request, item_id):
-    itemname = get_item_name(request, item_id)
+    itemname = get_item_name(item_id)
     if itemname:
         if is_item_in_inventory(request, item_id):
             remove_item_from_inventory(request, item_id)
