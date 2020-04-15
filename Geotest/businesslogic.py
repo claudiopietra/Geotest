@@ -22,14 +22,15 @@ def find_location(request, location_id):
     return_location = None
     inventory = get_session(request)['inventory']
     locations = Location.objects.filter(locationidx=location_id)
-    return str(len(locations))
     for location in locations:
         if location.in_inventory in inventory:
             return_location = location
+            return location.comment, location.in_inventory
             break
             
         if location.not_in_inventory not in inventory:
             return_location = location
+            return location.comment, location.in_inventory
             break
 
     return return_location
@@ -53,6 +54,9 @@ def add_item_to_inventory(request, item_id):
         session = get_session(request)
         #---Item found, check if already in inventory
         if item_id not in session['inventory']:
+            #---somehow a direct append on the list stored in the session
+            #   doesn't word - don't know why, but copying out and in again
+            #   solves the problem. 
             item_list = session['inventory']
             item_list.append(item_id)
             session['inventory'] = item_list
