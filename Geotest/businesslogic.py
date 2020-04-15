@@ -25,12 +25,12 @@ def find_location(request, location_id):
     for location in locations:
         if location.in_inventory in inventory:
             return_location = location
-            return location.comment + ', ' + location.in_inventory + ', ' + str(inventory)
+            return 'in inventory: ' + location.comment + ', ' + location.in_inventory + ', ' + str(inventory)
             break
             
         if location.not_in_inventory not in inventory:
             return_location = location
-            return location.comment + ', '+ location.not_in_inventory + ', ' + str(inventory)
+            return 'not in inventory: ' + location.comment + ', '+ location.not_in_inventory + ', ' + str(inventory)
             break
 
     return return_location
