@@ -23,12 +23,12 @@ def find_location(request, location_id):
     inventory = get_session(request)['inventory']
     locations = Location.objects.filter(locationidx=location_id)
     for location in locations:
-        if int(location.in_inventory) in inventory:
+        if location.in_inventory in inventory:
             return_location = location
             return 'in inventory: ' + location.comment + ', ' + location.in_inventory + ', ' + str(inventory)
             break
             
-        if (location.not_in_inventory) not in inventory:
+        if location.not_in_inventory not in inventory:
             return_location = location
             return 'not in inventory: ' + location.comment + ', '+ location.not_in_inventory + ', ' + str(inventory)
             break
@@ -58,7 +58,9 @@ def add_item_to_inventory(request, item_id):
             #   doesn't word - don't know why, but copying out and in again
             #   solves the problem. 
             item_list = session['inventory']
-            item_list.append(item_id)
+            #---we store the string of the item_id, makes it easier to handle
+            #   within lists and to compare it to textfields in the Location object.
+            item_list.append(str(item_id))
             session['inventory'] = item_list
                 
     return itemname
