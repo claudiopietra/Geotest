@@ -28,7 +28,7 @@ def display_location(request, location_id):
 def add_item(request, item_id):
     itemname = add_item_to_inventory(request, item_id)
     if itemname:     
-        return HttpResponse("Du hast ein %s erhalten, inventory=%s" %(itemname, get_inventory_name_list(request)))
+        return HttpResponse("Du hast ein %s erhalten, inventory=%s" %(itemname, str(request.session['inventory'])))
     else:
         return HttpResponse("Gegenstand nicht gefunden.")
 
