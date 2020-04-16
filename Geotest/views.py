@@ -41,11 +41,11 @@ def add_item(request, item_id):
 
 
 def remove_item(request, item_id):
-    itemname = get_item_name(item_id)
-    if itemname:
+    item = find_item(item_id)
+    if item:
         if is_item_in_inventory(request, item_id):
             remove_item_from_inventory(request, item_id)
-            return HttpResponse("Du hast ein %s gegeben" %itemname)
+            return render(request, 'item.html', {'itemname': item.itemname, 'body': item.htmlbody_remove})
         else:
             return HttpResponse("Du hast den Gegenstand gar nicht. ")
     else:

@@ -57,6 +57,8 @@ def get_item_name(item_id):
     item = find_item(item_id)
     if item:
         itemname = item.itemname
+        
+    return itemname
 
 
 def add_item_to_inventory(request, item_id):
