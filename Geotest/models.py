@@ -7,7 +7,7 @@ class Location(models.Model):
     comment = models.CharField(max_length=255, default="", blank=True)
     in_inventory = models.CharField(max_length=255, default="", blank=True)
     not_in_inventory = models.CharField(max_length=255, default="", blank=True)
-    htmlbody = models.TextField()
+    htmlbody = models.TextField(blank=True)
 
     def __str__(self):
         return self.locationname
@@ -16,8 +16,8 @@ class Location(models.Model):
 class Item(models.Model):
     itemname = models.CharField(max_length=255)
     itemidx = models.CharField(max_length=255)
-    htmlbody_add = models.TextField()
-    htmlbody_remove = models.TextField()
+    htmlbody_add = models.TextField(blank=True)
+    htmlbody_remove = models.TextField(blank=True)
     
     def __str__(self):
         return self.itemname
