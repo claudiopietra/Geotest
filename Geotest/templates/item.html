@@ -7,11 +7,12 @@
         <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
         <meta http-equiv="Pragma" content="no-cache" />
         <meta http-equiv="Expires" content="0" />        
-        <title>{{ item }}</title>
+        <title>{{ itemname }}</title>
         <link rel="stylesheet" href="{% static "/Geotest.css" %}" />
     </head>
 
     <body>
-        <h1>{{ item }}</h1>
+        <h1>{{ itemname }}</h1>
+        {{ body|safe }}
     </body>
 </html>

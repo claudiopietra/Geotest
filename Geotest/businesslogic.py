@@ -40,21 +40,29 @@ def get_inventory_list(request):
     return get_session(request)['inventory']
 
 
+def find_item(item_id):
+    """ finds an item and returns it, if found. """
+    return_item = None
+    items = Item.objects.filter(itemidx=item_id)
+    if items:
+        return_item = items[0]
+    
+    return return_item
+    
+
 def get_item_name(item_id):    
     """ Gets a name for an item-index. Returns '' if the 
         item is not found. """
-    itemname = ""
-    items = Item.objects.filter(itemidx=item_id)
-    if items:
-        itemname = items[0].itemname
-        
-    return itemname
+    itemname = ""        
+    item = find_item(item_id)
+    if item:
+        itemname = item.itemname
 
 
 def add_item_to_inventory(request, item_id):
     """ Adds an item to the inventory. """
-    itemname = get_item_name(item_id)
-    if itemname:
+    item = find_item(item_id)
+    if item:
         #---Item found, check if already in inventory
         inventory = get_inventory_list(request)
         if item_id not in inventory:
@@ -67,18 +75,20 @@ def add_item_to_inventory(request, item_id):
             session = get_session(request)
             session['inventory'] = inventory
                 
-    return itemname
+    return item
 
 
 def remove_item_from_inventory(request, item_id):
     """ Removes an item from the inventory. """
-    itemname = get_item_name(item_id)
-    if itemname:
+    item = find_item(item_id)
+    if item:
         inventory = get_inventory_list(request)
         if item_id not in inventory:
             inventory.remove(str(item_id))
             session = get_session(request)
             session['inventory'] = inventory
+            
+    return item
 
         
 def is_item_in_inventory(request, item_id):

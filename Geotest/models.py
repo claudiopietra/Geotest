@@ -16,6 +16,8 @@ class Location(models.Model):
 class Item(models.Model):
     itemname = models.CharField(max_length=255)
     itemidx = models.CharField(max_length=255)
+    htmlbody_add = models.TextField()
+    htmlbody_remove = models.TextField()
     
     def __str__(self):
         return self.itemname

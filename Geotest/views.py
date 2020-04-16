@@ -12,6 +12,7 @@ from .businesslogic import get_inventory_name_list
 from .businesslogic import get_inventory_list
 from .businesslogic import is_item_in_inventory
 from .businesslogic import get_item_name
+from .businesslogic import find_item
 from .businesslogic import find_location
 from .models import Location, Item
 
@@ -29,12 +30,12 @@ def display_location(request, location_id):
         return render(request, 'location.html', {'ort': location.locationname, 'body': location.htmlbody, 'inventory_list': inventory_list})
     else:
         return not_valid(request, location_id)
-        
-        
+
+
 def add_item(request, item_id):
-    itemname = add_item_to_inventory(request, item_id)
-    if itemname:     
-        return HttpResponse("Du hast ein %s erhalten" %itemname)
+    item = add_item_to_inventory(request, item_id)
+    if item:     
+        return render(request, 'item.html', {'itemname': item.itemname, 'body': item.htmlbody_add})
     else:
         return HttpResponse("Gegenstand nicht gefunden.")
 
