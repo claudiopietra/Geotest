@@ -30,7 +30,7 @@ def find_location(request, location_id):
             
         if location.not_in_inventory not in inventory:
             return_location = location
-            #return 'not in inventory: ' + location.comment + ', '+ location.not_in_inventory + ', ' + str(inventory)
+            return 'not in inventory: ' + location.comment + ', '+ location.not_in_inventory + ', ' + str(inventory)
             break
 
     return return_location
