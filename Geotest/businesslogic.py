@@ -32,7 +32,14 @@ def find_location(request, location_id):
         if location.not_in_inventory:
             if location.not_in_inventory not in inventory:
                 return_location = location
-                return 'not in inventory: ' + location.comment + ', '+ location.not_in_inventory + ', ' + str(inventory)
+                #return 'not in inventory: ' + location.comment + ', '+ location.not_in_inventory + ', ' + str(inventory)
+                break
+
+    if not return_location:
+        #---A default location can be provided. 
+        for location in locations:
+            if location.default:
+                return_location = location
                 break
 
     return return_location
