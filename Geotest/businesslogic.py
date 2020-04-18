@@ -23,15 +23,17 @@ def find_location(request, location_id):
     inventory = get_inventory_list(request)
     locations = Location.objects.filter(locationidx=location_id)
     for location in locations:
-        if location.in_inventory in inventory:
-            return_location = location
-            #return 'in inventory: ' + location.comment + ', ' + location.in_inventory + ', ' + str(inventory)
-            break
+        if inventory and location.in_inventory:
+            if location.in_inventory in inventory:
+                return_location = location
+                #return 'in inventory: ' + location.comment + ', ' + location.in_inventory + ', ' + str(inventory)
+                break
             
-        if location.not_in_inventory not in inventory:
-            return_location = location
-            return 'not in inventory: ' + location.comment + ', '+ location.not_in_inventory + ', ' + str(inventory)
-            break
+        if location.not_in_inventory:
+            if location.not_in_inventory not in inventory:
+                return_location = location
+                return 'not in inventory: ' + location.comment + ', '+ location.not_in_inventory + ', ' + str(inventory)
+                break
 
     return return_location
 
