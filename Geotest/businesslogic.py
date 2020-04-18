@@ -112,6 +112,8 @@ def remove_item_from_inventory(request, item_id):
             session = get_session(request)
             session['inventory'] = inventory
             
+            item = find_item(item_id)
+            
     return item
 
 
