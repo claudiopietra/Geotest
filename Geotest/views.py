@@ -15,7 +15,7 @@ from .businesslogic import is_item_in_inventory
 from .businesslogic import get_item_name
 from .businesslogic import find_item
 from .businesslogic import find_location
-frim .businesslogic import url_for_static_file
+from .businesslogic import url_for_static_file
 from .models import Location, Item
 
 
