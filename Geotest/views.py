@@ -32,7 +32,7 @@ def display_location(request, location_id):
                   'ort': location.locationname, 
                   'body': location.htmlbody, 
                   'inventory_list': inventory_list,
-                  'image': finders.find("location.locationidx + ".jpg")}
+                  'image': finders.find(location.locationidx + ".jpg")}
 
         
         return HttpResponse("Finders:" + finders.find("static/" + location.locationidx + ".jpg"))
