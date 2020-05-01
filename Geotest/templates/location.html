@@ -12,7 +12,7 @@
     </head>
 
     <body>
-        <img src="{% static "/{{ image }}" %}">
+        <img src="{{ STATIC_URL }}/{{ image }}">
         <h1>{{ ort }}</h1>
         {{ body|safe }}
         <p>Dein Inventar:
