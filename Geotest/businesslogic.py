@@ -23,6 +23,7 @@ def url_for_static_file(filename):
     """ Returns an URL for a static file. Returns
         empty if the file doesn't exist. """
     full_filename = os.path.join(settings.STATIC_ROOT, filename)
+    return full_filename
     if os.path.isfile(filename):
         return settings.STATIC_URL + "/" + filename
     else:
