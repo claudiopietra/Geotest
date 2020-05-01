@@ -34,8 +34,8 @@ def display_location(request, location_id):
                   'inventory_list': inventory_list,
                   'image': finders.find(location.locationidx + ".jpg")}
 
-        
-        return HttpResponse("Finders: %s" % finders.find(location.locationidx))
+        filename = location.locationidx + ".jpg"
+        return HttpResponse("Finders: %s" % finders.find(filename))
         #return render(request, 'location.html', values)
     else:
         return not_valid(request, location_id)
