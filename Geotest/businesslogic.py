@@ -20,7 +20,7 @@ def get_session(request):
 def find_static_file(filename):
     """ finds a static file (or not) and returns the 
         URL if found. """
-    return result = finders.find(filename)
+    return finders.find(filename)
 
     
 def find_location(request, location_id):

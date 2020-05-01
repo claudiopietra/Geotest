@@ -12,7 +12,9 @@
     </head>
 
     <body>
-        <img src="/static/{{ image }}">
+        {% if image %}
+            <img src="{{ image }}">
+        {% endif %}
         <h1>{{ ort }}</h1>
         {{ body|safe }}
         <p>Dein Inventar:
