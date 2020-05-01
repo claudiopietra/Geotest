@@ -15,9 +15,9 @@ from .businesslogic import is_item_in_inventory
 from .businesslogic import get_item_name
 from .businesslogic import find_item
 from .businesslogic import find_location
+frim .businesslogic import url_for_static_file
 from .models import Location, Item
 
-import os.path
 
 def index(request):
     """ Redirect to the first location. """
@@ -36,9 +36,9 @@ def display_location(request, location_id):
                   'inventory_list': inventory_list,
                   'image': finders.find(location.locationidx + ".jpg")}
 
-        filename = "/home/claudiopietra/Geotest/static/" + location.locationidx + ".jpg"
-        #return HttpResponse("Finders: %s" % finders.find(filename))
-        return HttpResponse("os.path: %s" % os.path.isfile(filename))
+        filename = location.locationidx + ".jpg"
+        return HttpResponse("url_for_static_file: %s" % url_for_static_file(filename))
+
         #return render(request, 'location.html', values)
     else:
         return not_valid(request, location_id)

@@ -15,6 +15,11 @@ def get_session(request):
         session['wrongurls'] = 0
 
     return session
+    
+
+def url_for_static_file(filename):
+    """ Returns an URL for a static file. Returns
+        empty if the file doesn't exist. """
 
     
 def find_location(request, location_id):
