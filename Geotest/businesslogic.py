@@ -2,6 +2,8 @@
     textadventure project. """
 
 from .models import Location, Item
+from django.conf import settings
+import os 
 
 
 def get_session(request):
@@ -20,6 +22,11 @@ def get_session(request):
 def url_for_static_file(filename):
     """ Returns an URL for a static file. Returns
         empty if the file doesn't exist. """
+    full_filename = os.path.join(settings.STATIC_ROOT, filename)
+    if os.path.isfile(filename):
+        return settings.STATIC_URL + "/" + filename
+    else:
+        return ""
 
     
 def find_location(request, location_id):
