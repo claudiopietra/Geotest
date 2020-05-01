@@ -3,6 +3,7 @@
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.contrib.staticfiles import finders
 import django
 
 from .businesslogic import get_session
@@ -31,7 +32,8 @@ def display_location(request, location_id):
                   'ort': location.locationname, 
                   'body': location.htmlbody, 
                   'inventory_list': inventory_list,
-                  'image': find_static_file(location.locationidx + ".jpg")}
+                  'image': finders.find(location.locationidx + ".jpg")}
+                  
         return render(request, 'location.html', values)
     else:
         return not_valid(request, location_id)
