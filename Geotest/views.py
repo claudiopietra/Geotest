@@ -35,7 +35,7 @@ def display_location(request, location_id):
                   'image': finders.find(location.locationidx + ".jpg")}
 
         
-        return HttpResponse("Finders: " + finders.find(location.locationidx + ".jpg"))
+        return HttpResponse("Finders: %s" % finders.find(location.locationidx))
         #return render(request, 'location.html', values)
     else:
         return not_valid(request, location_id)
