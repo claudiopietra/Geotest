@@ -44,8 +44,13 @@ def display_location(request, location_id):
 
 def add_item(request, item_id):
     item = add_item_to_inventory(request, item_id)
-    if item:     
-        return render(request, 'item.html', {'itemname': item.itemname, 'body': item.htmlbody_add})
+    if item:
+        image_filename = item.itemidx + ".jpg"
+        values = {'itemname': item.itemname, 
+                  'body': item.htmlbody_add, 
+                  'image': url_for_static_file(image_filename)}
+                  
+        return render(request, 'item.html', values)
     else:
         return HttpResponse("Gegenstand nicht gefunden.")
 

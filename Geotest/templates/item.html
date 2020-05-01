@@ -12,6 +12,9 @@
     </head>
 
     <body>
+        {% if image %}
+            <img src="{{ image }}">
+        {% endif %}    
         <h1>{{ itemname }}</h1>
         {{ body|safe }}
     </body>
