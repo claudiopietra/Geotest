@@ -30,16 +30,14 @@ def display_location(request, location_id):
     
     if location:
         inventory_list = get_inventory_name_list(request)
+        image_filename = location.locationidx + ".jpg"
         values = {'id': location.locationidx, 
                   'ort': location.locationname, 
                   'body': location.htmlbody, 
                   'inventory_list': inventory_list,
-                  'image': finders.find(location.locationidx + ".jpg")}
+                  'image': url_for_static_file(image_filename)}
 
-        filename = location.locationidx + ".jpg"
-        return HttpResponse("url_for_static_file: %s" % url_for_static_file(filename))
-
-        #return render(request, 'location.html', values)
+        return render(request, 'location.html', values)
     else:
         return not_valid(request, location_id)
 
