@@ -31,7 +31,7 @@ def display_location(request, location_id):
                   'ort': location.locationname, 
                   'body': location.htmlbody, 
                   'inventory_list': inventory_list,
-                  'image': location.locationidx + ".jpg"}
+                  'image': find_static_file(location.locationidx + ".jpg")}
         return render(request, 'location.html', values)
     else:
         return not_valid(request, location_id)
