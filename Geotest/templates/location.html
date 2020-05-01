@@ -8,11 +8,11 @@
         <meta http-equiv="Pragma" content="no-cache" />
         <meta http-equiv="Expires" content="0" />        
         <title>{{ ort }}</title>
-        <link rel="stylesheet" href="{% static "/{{image}}" %}" />
+        <link rel="stylesheet" href="{% static "/Geotest.css" %}" />
     </head>
 
     <body>
-        <img src="{% static "/1.jpg" %}">
+        <img src="{% static "/{{ image }}" %}">
         <h1>{{ ort }}</h1>
         {{ body|safe }}
         <p>Dein Inventar:
