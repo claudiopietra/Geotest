@@ -5,6 +5,9 @@ from .models import Location, Item
 from django.conf import settings
 import os 
 
+#------------------------------------------------------------------------------
+#   Session Handling
+#------------------------------------------------------------------------------
 
 def get_session(request):
     """ Initialize the session, if not already done. """
@@ -14,11 +17,15 @@ def get_session(request):
         session.set_expiry(86400)
         session['initialized'] = True
         session['inventory'] = []
+        session['pastinventory'] = []
         session['wrongurls'] = 0
 
     return session
-    
 
+#------------------------------------------------------------------------------
+#   Static File Handling
+#------------------------------------------------------------------------------
+    
 def url_for_static_file(filename):
     """ Returns an URL for a static file. Returns
         empty if the file doesn't exist. """
@@ -28,6 +35,10 @@ def url_for_static_file(filename):
     else:
         return ""
 
+#------------------------------------------------------------------------------
+#   Location Handling
+#------------------------------------------------------------------------------
+
     
 def find_location(request, location_id):
     """ Finds the location with location_id, which matches
@@ -36,20 +47,31 @@ def find_location(request, location_id):
     inventory = get_inventory_list(request)
     locations = Location.objects.filter(locationidx=location_id)
     for location in locations:
+        #---First we check if the location has an "in inventory" condition
+        #   and return the first location found.
         if inventory and location.in_inventory:
             if location.in_inventory in inventory:
                 return_location = location
-                #return 'in inventory: ' + location.comment + ', ' + location.in_inventory + ', ' + str(inventory)
                 break
             
+        #---Then, we check if the location has any "not in inventory" condition. 
+        #   We return such a location, if an item specified in the location is 
+        #   not in the inventory.
         if location.not_in_inventory:
             if location.not_in_inventory not in inventory:
                 return_location = location
-                #return 'not in inventory: ' + location.comment + ', '+ location.not_in_inventory + ', ' + str(inventory)
+                break
+                
+        #---Locations can also have a condition for items that were in the inventory.
+        if location.was_in_inventory:
+            past_inventory = get_past_inventory_list(request)
+            if location.was_in_inventory in past_inventory:
+                return_location = location
                 break
 
+    #---if we don't find a location with the inventory conditions, we return the 
+    #   default location. 
     if not return_location:
-        #---A default location can be provided. 
         for location in locations:
             if location.default:
                 return_location = location
@@ -58,8 +80,17 @@ def find_location(request, location_id):
     return return_location
 
 
+#------------------------------------------------------------------------------
+#   Inventory Handling
+#------------------------------------------------------------------------------
+
+
 def get_inventory_list(request):
     return get_session(request)['inventory']
+    
+
+def get_past_inventory_list(request):
+    return get_session(request)['pastinventory']
 
 
 def find_item(item_id):
@@ -109,14 +140,15 @@ def add_item_to_inventory(request, item_id):
             inventory.append(item_id)
             session = get_session(request)
             session['inventory'] = inventory
-
-            item = find_item(item_id)
             
+            item = find_item(item_id)
+
     return item
 
 
 def remove_item_from_inventory(request, item_id):
-    """ Removes an item from the inventory. """
+    """ Removes an item from the inventory.
+        The item is, however, stored in the 'pastinventory' list. """
     if item_exists(item_id):
         if is_item_in_inventory(request, item_id):
             inventory = get_inventory_list(request)
@@ -124,9 +156,13 @@ def remove_item_from_inventory(request, item_id):
             inventory.remove(item_id)
             session = get_session(request)
             session['inventory'] = inventory
-            
+
+            pastinventory = session['pastinventory']
+            pastinventory.append(item_id)
+            session['pastinventory'] = pastinventory
+
             item = find_item(item_id)
-            
+
     return item
 
 
