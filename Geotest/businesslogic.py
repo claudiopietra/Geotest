@@ -53,27 +53,28 @@ def find_location(request, location_id):
         #   would kick in. 
         if location.was_in_inventory:
             past_inventory = get_past_inventory_list(request)
-            return "past_inventory: " + str(past_inventory)
             if location.was_in_inventory in past_inventory:
                 return_location = location
                 break   
 
-    for location in locations:
-        #---Then we check if the location has an "in inventory" condition
-        #   and return the first location found.
-        if inventory and location.in_inventory:
-            if location.in_inventory in inventory:
-                return_location = location
-                break
-                
-    for location in locations:            
-        #---Then we check if the location has any "not in inventory" condition. 
-        #   We return such a location, if an item specified in the location is 
-        #   not in the inventory.
-        if location.not_in_inventory:
-            if location.not_in_inventory not in inventory:
-                return_location = location
-                break
+    if not return_location:
+        for location in locations:
+            #---Then we check if the location has an "in inventory" condition
+            #   and return the first location found.
+            if inventory and location.in_inventory:
+                if location.in_inventory in inventory:
+                    return_location = location
+                    break
+
+    if not return_location:     
+        for location in locations:            
+            #---Then we check if the location has any "not in inventory" condition. 
+            #   We return such a location, if an item specified in the location is 
+            #   not in the inventory.
+            if location.not_in_inventory:
+                if location.not_in_inventory not in inventory:
+                    return_location = location
+                    break
 
     #---if we don't find a location with the inventory conditions, we return the 
     #   default location. 
