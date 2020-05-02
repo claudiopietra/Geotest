@@ -9,7 +9,7 @@ admin.site.register(Item, ItemAdmin)
 
 
 class LocationAdmin(admin.ModelAdmin):
-    list_display = ('locationname', 'locationidx', 'comment', 'in_inventory', 'not_in_inventory')
+    list_display = ('locationname', 'locationidx', 'comment', 'in_inventory', 'not_in_inventory', 'was_in_inventory')
     ordering = ['locationidx']
 
 
