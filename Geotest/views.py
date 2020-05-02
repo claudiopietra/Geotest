@@ -27,6 +27,8 @@ def index(request):
 def display_location(request, location_id):
     location = find_location(request, location_id)
     
+    return HttpResponse(location)
+    
     if location:
         inventory_list = get_inventory_name_list(request)
         image_filename = location.locationidx + ".jpg"

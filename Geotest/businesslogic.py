@@ -47,6 +47,8 @@ def find_location(request, location_id):
     inventory = get_inventory_list(request)
     locations = Location.objects.filter(locationidx=location_id)
     
+    return "Anzahl Locations: " + str(len(locations))
+    
     for location in locations:
         #---Locations can have a condition for items that were in the inventory.
         #   We have to check that as the first step, otherwise the "not in inventory"
