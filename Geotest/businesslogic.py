@@ -46,26 +46,29 @@ def find_location(request, location_id):
     return_location = None
     inventory = get_inventory_list(request)
     locations = Location.objects.filter(locationidx=location_id)
+    
     for location in locations:
-        #---First we check if the location has an "in inventory" condition
+        #---Locations can have a condition for items that were in the inventory.
+        #   We have to check that as the first step, otherwise the "not in inventory"
+        #   would kick in. 
+        if location.was_in_inventory:
+            past_inventory = get_past_inventory_list(request)
+            if location.was_in_inventory in past_inventory:
+                return_location = location
+                break      
+
+        #---Then we check if the location has an "in inventory" condition
         #   and return the first location found.
         if inventory and location.in_inventory:
             if location.in_inventory in inventory:
                 return_location = location
                 break
             
-        #---Then, we check if the location has any "not in inventory" condition. 
+        #---Then we check if the location has any "not in inventory" condition. 
         #   We return such a location, if an item specified in the location is 
         #   not in the inventory.
         if location.not_in_inventory:
             if location.not_in_inventory not in inventory:
-                return_location = location
-                break
-                
-        #---Locations can also have a condition for items that were in the inventory.
-        if location.was_in_inventory:
-            past_inventory = get_past_inventory_list(request)
-            if location.was_in_inventory in past_inventory:
                 return_location = location
                 break
 
