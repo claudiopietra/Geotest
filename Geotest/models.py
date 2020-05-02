@@ -7,6 +7,7 @@ class Location(models.Model):
     comment = models.CharField(max_length=255, default="", blank=True)
     in_inventory = models.CharField(max_length=255, default="", blank=True)
     not_in_inventory = models.CharField(max_length=255, default="", blank=True)
+    was_in_inventory = models.CharField(max_length=255, default="", blank=True)
     default = models.BooleanField(default=False)
     htmlbody = models.TextField(blank=True)
 
