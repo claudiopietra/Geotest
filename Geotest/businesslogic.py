@@ -173,11 +173,3 @@ def remove_item_from_inventory(request, item_id):
     return item
 
 
-def get_inventory_name_list(request):
-    inventorylist = get_session(request)['inventory']
-    namelist = []
-    for item_id in inventorylist:
-        namelist.append(get_item_name(item_id))
-   
-    return namelist
-        

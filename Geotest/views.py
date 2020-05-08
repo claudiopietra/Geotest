@@ -9,7 +9,6 @@ import django
 from .businesslogic import get_session
 from .businesslogic import add_item_to_inventory
 from .businesslogic import remove_item_from_inventory
-from .businesslogic import get_inventory_name_list
 from .businesslogic import get_inventory_list
 from .businesslogic import is_item_in_inventory
 from .businesslogic import get_item_name
