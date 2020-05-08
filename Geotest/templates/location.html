@@ -21,12 +21,12 @@
         {% if inventory %}
         <h2>Inventar</h2>
         <table>
-            {% for item in inventory %}
+            {% for url, name in inventory %}
             <tr>
                 <td width="200" style="align:left">
-                    <img src={{item[0]}} style="align:left; margin-left:0px; text-align:left;" />
+                    <img src={{url}} style="align:left; margin-left:0px; text-align:left;" />
                     </td>
-                    <td width="100" text-align="left">{{item[1]}}</td>
+                    <td width="100" text-align="left">{{name}}</td>
                 </tr>
             {% endfor %}
         </table>
