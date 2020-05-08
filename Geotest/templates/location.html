@@ -18,35 +18,17 @@
         <h1>{{ ort }}</h1>
         {{ body|safe }}
         <p>Dein Inventar:
-        {% if inventory_list %}
-        <ul>
-        {% for item in inventory_list %}
-            <li>{{ item }}</li>
-        {% endfor %}
-        </ul>
-        {% else %}
-        <p>Ausser Deinen Kleidern keine Gegenstände</p>
-        {% endif %}
-        </p>
+        {% if inventory %}
         <h2>Inventar</h2>
-        <p>
-            <table>
-                <tr>
-                    <td width="200" style="align:left">
-                        <img src="/static/104829.jpg" style="align:left; margin-left:0px; text-align:left;" />
+        <table>
+            {% for item in inventory %}
+            <tr>
+                <td width="200" style="align:left">
+                    <img src={{item[0]}} style="align:left; margin-left:0px; text-align:left;" />
                     </td>
-                    <td width="100" text-align="left">Fisch</td>
+                    <td width="100" text-align="left">{{item[1]}}</td>
                 </tr>
-                <tr>
-                    <td width="200" style="align:left">
-                        <img src="/static/367458.jpg" style="align:left; margin-left:0px; text-align:left;" />
-                    </td>
-                    <td width="100" text-align="left">Korb</td>
-                </tr>
-                
-                
-            </table>
-
-        </p>
+            {% endfor %}
+        </table>
     </body>
 </html>

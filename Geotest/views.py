@@ -28,13 +28,17 @@ def display_location(request, location_id):
     location = find_location(request, location_id)
     
     if location:
-        inventory_list = get_inventory_name_list(request)
+        inventory = []
+        inventory_list = get_inventory_list(request)
+        for item in inventory_list:
+            inventory.append((url_for_static_file(str(item) + ".jpg"), get_item_name(item))) 
         image_filename = location.locationidx + ".jpg"
         values = {'id': location.locationidx, 
                   'ort': location.locationname, 
                   'body': location.htmlbody, 
-                  'inventory_list': inventory_list,
-                  'image': url_for_static_file(image_filename)}
+                  'inventory': inventory,
+                  'image': url_for_static_file(image_filename)
+                 }
 
         return render(request, 'location.html', values)
     else:
